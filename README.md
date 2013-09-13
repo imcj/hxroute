@@ -9,9 +9,45 @@ URL路由是WEB MVC中非常重要的一个环节，hxroute并不打算做一个
 你可以轻易的把他集成到你的web项目中，选择自己喜欢的映射方式。
 
     Route
-        .addPackage("user", alias="member");
+    	.allocate()
+        .addPackage("blog")
+        .addPackage("user");
+
+控制器文件布局
+
+    user
+    |---controllers
+    |   |---LoginController.hx
+    |   |---RegisterController.hx
+    |   |---ProfileController.hx
+
+    blog
+    |---controllers
+    |   |---IndexController.hx
+    |   |---ListController.hx
+    
+控制器事例
+
+	package blog.controllers;
+	
+	class IndexController
+	{
+		public function get(id:Int):String
+		{
+			return "Hello";
+		}
+	}
+	
+URL地址
+
+	http://localhost:8000/blog/1/
+	
+
+Route API的更多应用
+------------------
 
     Route
+    	.addPackage("user", alias="member")
         .namespace("user.controllers")
         .add("/", "User")
         .add("/register/", "Register")
@@ -19,7 +55,6 @@ URL路由是WEB MVC中非常重要的一个环节，hxroute并不打算做一个
 
     var mapper = route.match("/1");
     Assert.areEqual("1", mapper.parameters[0]);
-
 
 自定义URL分析器
 --------------
